@@ -1,0 +1,25 @@
+<div class="product">
+  <div class="product__title">{{ name }}</div>
+  <table class="product__table">
+    <tr>
+      <td>Name</td>
+      <td>{{ name }}</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>{{ description }}</td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td>{{ price }} USD</td>
+    </tr>
+    <tr>
+      <td>Category</td>
+      <td>{{ getCategoryName(category) }}</td>
+    </tr>
+    <tr>
+      <td>Available</td>
+      <td>{{ isAvailable ? "Yes" : "No" }}</td>
+    </tr>
+  </table>
+</div>
