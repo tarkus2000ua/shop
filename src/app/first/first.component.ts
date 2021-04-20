@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-enum Category {
-  Desctops,
-  Laptops,
-  Tablets,
-}
-const CATEGORY_NAMES = ['Desctops', 'Laptops', 'Tablets'];
+import { Category } from '../models/Product.model';
+
+const CATEGORY_NAMES = ['Desktops', 'Laptops', 'Tablets'];
 
 @Component({
   selector: 'app-first',
@@ -14,7 +11,7 @@ const CATEGORY_NAMES = ['Desctops', 'Laptops', 'Tablets'];
 })
 export class FirstComponent implements OnInit {
   name = 'IPad';
-  description = "8th genereation of Apple's IPad";
+  description = '8th generation of Apple\'s IPad';
   price = 350;
   category = Category.Tablets;
   isAvailable = true;
@@ -23,7 +20,7 @@ export class FirstComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCategoryName(id: number) {
+  getCategoryName(id: number): string {
     return CATEGORY_NAMES[id];
   }
 }

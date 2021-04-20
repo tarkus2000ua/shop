@@ -1,0 +1,5 @@
+<div class="cart__title">Cart</div>
+<ng-container *ngIf="(items$ | async)?.length; else empty">
+    <div  *ngFor="let item of (items$ | async); trackBy: trackByItems">{{item.id}}. {{item.name}}</div>
+</ng-container>
+<ng-template #empty>Cart is empty</ng-template>

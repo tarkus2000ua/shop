@@ -1,0 +1,15 @@
+.products__table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 400px;
+    margin-bottom: 20px;
+
+    td, th {
+      border: 1px solid black;
+      padding: 5px 10px;
+    }
+
+    tr:hover {
+        cursor: pointer;
+    }
+  }

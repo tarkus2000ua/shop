@@ -18,3 +18,11 @@
     }
   }
 }
+
+:host{
+  width: 50%;
+  border: 5px solid green;
+  display: block;
+  padding: 10px;
+  margin-bottom: 20px;
+}

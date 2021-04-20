@@ -1,0 +1,18 @@
+<h2>Product list</h2>
+<table class="products__table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; trackBy: trackByItems"
+        (click)="onProductSelected(product)"
+        [style.background]="product === selectedProduct ? 'cyan' : 'none'">
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+    </tr>
+  </tbody>
+</table>
+<app-product [product]="selectedProduct"></app-product>
