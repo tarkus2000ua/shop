@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Product } from '../../models/Product.model';
+import { Product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  products: Product[] = [];
+  private products: Product[] = [];
 
   constructor() { }
 
-  addItem(item: Product): void{
-    if (!this.products){
-      this.products = [];
-    }
+  addItem(item: Product): void {
+    // if (!this.products){
+    //   this.products = [];
+    // }
     this.products.push(item);
   }
 

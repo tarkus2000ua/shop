@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Category } from '../models/Product.model';
+import { Category } from '../models/product.model';
 
 const CATEGORY_NAMES = ['Desktops', 'Laptops', 'Tablets'];
 

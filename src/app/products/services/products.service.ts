@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Category, Product } from '../../models/Product.model';
+import { Category, Product } from '../../models/product.model';
 
-const PRODUCTS = [
+const PRODUCTS: Product[] = [
   {
     id: 1,
     name: 'IPad 8',
