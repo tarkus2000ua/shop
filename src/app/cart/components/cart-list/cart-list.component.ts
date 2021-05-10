@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../../models/Product.model';
+import { Product } from '../../../models/product.model';
 
 @Component({
   selector: 'app-cart-list',
