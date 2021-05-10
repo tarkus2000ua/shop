@@ -22,5 +22,5 @@
         <td>{{ product.isAvailable ? "Yes" : "No" }}</td>
       </tr>
     </table>
-    <button class="button" (click) ="onBuy(product)">Buy</button>
+    <button class="button" [attr.disabled]="!product.isAvailable ? true : null" (click) ="onBuy(product)">Buy</button>
 </div>

@@ -8,7 +8,7 @@ const PRODUCTS: Product[] = [
     description: 'The eighth-generation iPad (officially the iPad 10.2-inch, marketed as iPad) is a tablet computer developed and marketed by Apple Inc. as the successor to the 7th-generation iPad. It features the same 10.2-inch Retina display as its predecessor, with the SoC upgraded to the Apple A12 Bionic processor, making it 40% faster according to Apple.',
     price: 350,
     category: Category.Tablets,
-    isAvailable: true
+    isAvailable: false
   },
   {
     id: 2,
