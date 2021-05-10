@@ -5,10 +5,11 @@ import { CartListComponent } from './components/cart-list/cart-list.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CartListComponent
+  ],
   imports: [
     CommonModule,
-    CartListComponent
   ],
   exports: [
     CartListComponent
