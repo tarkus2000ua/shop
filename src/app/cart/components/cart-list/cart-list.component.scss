@@ -7,8 +7,25 @@
     padding: 10px;
 }
 
-.cart__title {
-    font-weight: bold;
-    text-decoration: underline;
-    margin-bottom: 5px;
+.cart {
+    &__title {
+        font-weight: bold;
+        text-decoration: underline;
+        margin-bottom: 5px;
+    }
+
+    &__table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        max-width: 800px;
+    
+        td,th {
+          border: 1px solid black;
+          padding: 5px 10px;
+        }
+      }
+
+    app-cart-item {
+        display: contents;
+    }
 }

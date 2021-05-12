@@ -1,5 +1,28 @@
 <div class="cart__title">Cart</div>
-<ng-container *ngIf="(items$ | async)?.length; else empty">
-    <div  *ngFor="let item of (items$ | async); trackBy: trackByItems">{{item.id}}. {{item.name}}</div>
+<ng-container *ngIf="items?.length; else empty">
+  <table class="cart__table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Q-ty</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr app-cart-item
+          appHighlight
+          *ngFor="let cartItem of items; let i = index; trackBy: trackByItems"
+          [itemName]="cartItem.item.name"
+          [count]="cartItem.count"
+          [index]="i"
+          (countChange)="onCountChange(i,$event)"
+          (delete)="onDelete(i)">
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="4">{{items.length}} item(s), total sum: {{getTotalSum()}}</td>
+    </tfoot>
+  </table>
 </ng-container>
 <ng-template #empty>Cart is empty</ng-template>

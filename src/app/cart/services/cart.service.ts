@@ -1,24 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { CartItem } from './../../models/CartItem.model';
 import { Product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private products: Product[] = [];
+  
+  private cartItems: CartItem[] = [];
 
   constructor() { }
 
   addItem(item: Product): void {
-    // if (!this.products){
-    //   this.products = [];
-    // }
-    this.products.push(item);
+    const index = this.cartItems.findIndex(el => el.item.id === item.id);
+    if (index !== -1){
+      const itemToUpdate = this.cartItems[index];
+      itemToUpdate.count += 1;
+    } else {
+      this.cartItems.push({item, count: 1});
+    }
   }
 
-  getItems(): Observable<Product[]>{
-    return of(this.products);
+  getItems(): Observable<CartItem[]>{
+    return of(this.cartItems);
   }
+
 }

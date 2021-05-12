@@ -14,3 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Products Service
 - CartList Component
 - Cart Service
+## [1.0.1] - 2021-05-11
+
+### Changed
+- Cart, Product, Order features moved to cart.module, product.module, order.module
+### Added
+- Added items calculation in Cart
+- Added total calculation in Cart
+- Increment, Decrement, Delete buttons added for cart item
+- Shared module added
+- HighlightDirective added to Shared module
+- HighlightDirective bound to cart items
+- Title added to AppComponent 
