@@ -1,10 +1,29 @@
 <div class="cart__title">Cart</div>
 <ng-container *ngIf="items?.length; else empty">
+  <div class="sort">
+    <div class="key">
+      <label for="sortField">Sort key:</label>
+      <select [(ngModel)]="sortField"
+              name="sortField">
+        <option *ngFor="let sortOption of sortOptions"
+                [value]="sortOption">{{sortOption}}</option>
+      </select>
+
+    </div>
+    <div>
+      <label for="sortDirection">ASC/DESC</label>
+      <input type="checkbox"
+             [(ngModel)]="isAsc"
+             name="sortDirection">
+    </div>
+  </div>
+
   <table class="cart__table">
     <thead>
       <tr>
         <th></th>
         <th>Name</th>
+        <th>Price</th>
         <th>Q-ty</th>
         <th></th>
       </tr>
@@ -12,16 +31,19 @@
     <tbody>
       <tr app-cart-item
           appHighlight
-          *ngFor="let cartItem of items; let i = index; trackBy: trackByItems"
+          *ngFor="let cartItem of items | orderBy:sortField:isAsc; let i = index; trackBy: trackByItems"
           [itemName]="cartItem.item.name"
+          [itemPrice]="cartItem.item.price"
           [count]="cartItem.count"
           [index]="i"
-          (countChange)="onCountChange(i,$event)"
+          (increase)="onIncrease(i,$event)"
+          (decrease)="onDecrease(i,$event)"
           (delete)="onDelete(i)">
       </tr>
     </tbody>
     <tfoot>
-      <td colspan="4">{{items.length}} item(s), total sum: {{getTotalSum()}}</td>
+      <td colspan="4">{{totalQuantity}} item(s), total sum: {{totalSum}}</td>
+      <td><button (click)="onRemoveAll()">Clear</button></td>
     </tfoot>
   </table>
 </ng-container>

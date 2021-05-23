@@ -1,26 +1,29 @@
-<div class="product" *ngIf="product">
-    <div class="product__title">{{ product.name }}</div>
-    <table class="product__table">
-      <tr>
-        <td><b>Name</b></td>
-        <td>{{ product.name }}</td>
-      </tr>
-      <tr>
-        <td><b>Description</b></td>
-        <td>{{ product.description }}</td>
-      </tr>
-      <tr>
-        <td><b>Price</b></td>
-        <td>{{ product.price }} USD</td>
-      </tr>
-      <tr>
-        <td><b>Category</b></td>
-        <td>{{ getCategoryName(product.category) }}</td>
-      </tr>
-      <tr>
-        <td><b>Available</b></td>
-        <td>{{ product.isAvailable ? "Yes" : "No" }}</td>
-      </tr>
-    </table>
-    <button class="button" [attr.disabled]="!product.isAvailable ? true : null" (click) ="onBuy(product)">Buy</button>
+<div class="product"
+     *ngIf="product">
+  <div class="product__title">{{ product.name }}</div>
+  <table class="product__table">
+    <tr>
+      <td><b>Name</b></td>
+      <td>{{ product.name }}</td>
+    </tr>
+    <tr>
+      <td><b>Description</b></td>
+      <td>{{ product.description }}</td>
+    </tr>
+    <tr>
+      <td><b>Price</b></td>
+      <td>{{ product.price }} USD</td>
+    </tr>
+    <tr>
+      <td><b>Category</b></td>
+      <td>{{ getCategoryName(product.category) | uppercase}}</td>
+    </tr>
+    <tr>
+      <td><b>Available</b></td>
+      <td>{{ product.isAvailable ? "Yes" : "No" }}</td>
+    </tr>
+  </table>
+  <button class="button"
+          [attr.disabled]="!product.isAvailable ? true : null"
+          (click)="onBuy(product)">Buy</button>
 </div>

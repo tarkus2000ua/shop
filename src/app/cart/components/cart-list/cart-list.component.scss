@@ -18,14 +18,27 @@
         border: 1px solid black;
         border-collapse: collapse;
         max-width: 800px;
-    
-        td,th {
-          border: 1px solid black;
-          padding: 5px 10px;
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 5px 10px;
         }
-      }
+    }
 
     app-cart-item {
         display: contents;
+    }
+}
+
+.sort {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+
+    select {
+        width: 100px;
+        margin-left: 10px;
     }
 }

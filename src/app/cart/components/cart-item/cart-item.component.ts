@@ -1,36 +1,34 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'tr[app-cart-item]',
-  templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // tslint:disable-next-line:component-selector
+    selector: 'tr[app-cart-item]',
+    templateUrl: './cart-item.component.html',
+    styleUrls: ['./cart-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartItemComponent implements OnInit {
-  @Input() itemName: string;
-  @Input() count: number;
-  @Input() index: number;
-  @Output() countChange = new EventEmitter<number>();
-  @Output() delete = new EventEmitter<void>();
+export class CartItemComponent {
+    @Input() itemName: string;
+    @Input() itemPrice: number;
+    @Input() count: number;
+    @Input() index: number;
+    @Output() increase = new EventEmitter<number>();
+    @Output() decrease = new EventEmitter<number>();
+    @Output() delete = new EventEmitter<void>();
 
-  constructor() { }
+    constructor() {}
 
-  ngOnInit(): void {
-  }
-
-  increment(): void{
-    this.countChange.emit(this.count + 1);
-  }
-
-  decrement(): void{
-    if (this.count > 0){
-      this.countChange.emit(this.count - 1);
+    onIncrease(): void {
+        this.increase.emit(1);
     }
-  }
 
-  deleteItem(): void{
-    this.delete.emit();
-  }
+    onDecrease(): void {
+        if (this.count > 0) {
+            this.decrease.emit(1);
+        }
+    }
 
+    deleteItem(): void {
+        this.delete.emit();
+    }
 }

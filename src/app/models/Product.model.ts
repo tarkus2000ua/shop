@@ -1,8 +1,8 @@
 export enum Category {
     Desktops,
     Laptops,
-    Tablets,
-  }
+    Tablets
+}
 
 export interface Product {
     id: number;

@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products; trackBy: trackByItems"
+    <tr *ngFor="let product of productsService.getProducts() | async; trackBy: trackByItems"
         (click)="onProductSelected(product)"
         [style.background]="product === selectedProduct ? 'cyan' : 'none'">
       <td>{{product.name}}</td>
@@ -15,4 +15,5 @@
     </tr>
   </tbody>
 </table>
-<app-product [product]="selectedProduct" (buy)="onBuy($event)"></app-product>
+<app-product [product]="selectedProduct"
+             (buy)="onBuy($event)"></app-product>
