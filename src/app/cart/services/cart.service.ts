@@ -11,6 +11,8 @@ export class CartService {
     private cartProducts: CartItem[] = [];
     totalQuantity: number;
     totalSum: number;
+    // Думаю, то тут можно обойтись одним сабджектом,
+    // так как все эти изменения происходят вместе
     cartChanged = new Subject<CartItem[]>();
     totalChanged = new Subject<number>();
     quantityChanged = new Subject<number>();
