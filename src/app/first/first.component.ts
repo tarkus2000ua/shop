@@ -1,11 +1,11 @@
-import { LocalStorage, LocalStorageService } from './../core/services/local-storage.service';
+import { LocalStorage, LocalStorageService, StorageService } from './../core/services/local-storage.service';
 import { GeneratorService } from '../core/services/generator';
 import { generatedString, GeneratorFactory } from './../core/services/generator.factory';
 import { ConfigOptionsService } from './../core/services/config-options.service';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 
 import { Category } from '../models/product.model';
-import { APP_INFO, ConstantsService } from '../core/services/constant.service';
+import { AppInfo, APP_INFO, ConstantsService } from '../core/services/constant.service';
 
 const CATEGORY_NAMES = ['Desktops', 'Laptops', 'Tablets'];
 
@@ -31,9 +31,9 @@ export class FirstComponent implements OnInit {
     constructor(
         @Optional() private configService: ConfigOptionsService,
         @Optional() private generatorService: GeneratorService,
-        @Optional() @Inject(ConstantsService) private constantsService,
-        @Optional() @Inject(generatedString) private genString,
-        @Optional() @Inject(LocalStorageService) private localStorageService
+        @Optional() @Inject(ConstantsService) private constantsService: AppInfo,
+        @Optional() @Inject(generatedString) private genString: string,
+        @Optional() @Inject(LocalStorageService) private localStorageService: StorageService
     ) {}
 
     ngOnInit(): void {
