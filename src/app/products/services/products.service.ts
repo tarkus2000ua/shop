@@ -48,7 +48,26 @@ const PRODUCTS: Product[] = [
 export class ProductsService {
     constructor() {}
 
+    products = [...PRODUCTS];
+
     getProducts(): Observable<Product[]> {
-        return of(PRODUCTS);
+        return of(this.products);
     }
+
+    getProduct(id: number): Observable<Product>{
+        return of(this.products.find(item => item.id === id));
+    }
+
+    createProduct(product: Product): void {
+        this.products.push(product);
+      }
+
+      updateProduct(product: Product): void {
+        const i = this.products.findIndex(u => u.id === product.id);
+
+        if (i > -1) {
+            this.products.splice(i, 1, product);
+        }
+      }
+
 }

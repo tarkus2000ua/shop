@@ -1,0 +1,21 @@
+.form-group {
+  display: flex;
+  max-width: 800px;
+  margin-bottom: 10px;
+
+  label {
+    width: 200px;
+  }
+
+  input {
+    width: 600px;
+  }
+
+  &:nth-child(2) {
+    flex: 1;
+  }
+}
+
+button {
+  margin-right: 10px;
+}

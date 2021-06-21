@@ -11,7 +11,9 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { Router } from '@angular/router';
 
-import {MenubarModule} from 'primeng/menubar';
+import { MenubarModule } from 'primeng/menubar';
+import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,17 +22,19 @@ import {MenubarModule} from 'primeng/menubar';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CartModule,
     ProductsModule,
     OrdersModule,
     SharedModule,
     MenubarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(router: Router) {
     const replacer = (key: string, value: any): string =>
       typeof value === 'function' ? value.name : value;

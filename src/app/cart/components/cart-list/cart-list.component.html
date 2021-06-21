@@ -1,5 +1,5 @@
 <div class="cart__title">Cart</div>
-<ng-container *ngIf="items?.length; else empty">
+<ng-container *ngIf="items; else empty">
   <div class="sort">
     <div class="key">
       <label for="sortField">Sort key:</label>
@@ -48,3 +48,4 @@
   </table>
 </ng-container>
 <ng-template #empty>Cart is empty</ng-template>
+<button (click)="onProcessOrder()">Process Order</button>

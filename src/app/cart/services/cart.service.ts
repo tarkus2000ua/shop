@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { CartItem } from './../../models/CartItem.model';
 import { Product } from '../../models/product.model';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CartService {
     private cartProducts: CartItem[] = [];
     totalQuantity: number;
     totalSum: number;
-    cartChanged = new Subject<CartItem[]>();
-    totalChanged = new Subject<number>();
-    quantityChanged = new Subject<number>();
+    cartChanged = new BehaviorSubject<CartItem[]>(this.cartProducts);
+    totalChanged = new BehaviorSubject<number>(0);
+    quantityChanged = new BehaviorSubject<number>(0);
 
-    constructor() {}
+    constructor(private storageService: LocalStorageService) {}
 
     addProduct(item: Product, quantity = 1): void {
         const products = JSON.parse(JSON.stringify(this.cartProducts));
@@ -62,18 +63,19 @@ export class CartService {
         this.updateCartData();
     }
 
-    getProducts(): Observable<CartItem[]> {
-        return of(this.cartProducts);
+    getProducts(): void {
+        this.cartChanged.next(this.cartProducts);
     }
 
     updateCartData(): void {
         this.cartChanged.next(this.cartProducts);
         this.totalChanged.next(this.calcTotal());
         this.quantityChanged.next(this.cartProducts.length);
+        this.storageService.setValue('cart', JSON.stringify(this.cartProducts));
     }
 
     isEmptyCart(): boolean {
-        return this.cartProducts.length ? true : false;
+        return this.cartProducts.length ? false : true;
     }
 
     calcTotal(): number {

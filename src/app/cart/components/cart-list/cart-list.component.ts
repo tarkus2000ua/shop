@@ -3,6 +3,9 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from './../../../models/CartItem.model';
 import { Product } from '../../../models/product.model';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart-list',
@@ -19,7 +22,7 @@ export class CartListComponent implements OnInit {
 
     @ViewChild('selector') selector;
 
-    constructor(private cartService: CartService) {}
+    constructor(private cartService: CartService, private router: Router) {}
 
     ngOnInit(): void {
         this.cartService.cartChanged.subscribe((items) => (this.items = items));
@@ -45,5 +48,10 @@ export class CartListComponent implements OnInit {
 
     onRemoveAll(): void {
         this.cartService.removeAllProducts();
+    }
+
+    onProcessOrder(): void {
+        const link = ['/order'];
+        this.router.navigate(link);
     }
 }

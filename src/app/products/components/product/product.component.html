@@ -1,6 +1,6 @@
 <div class="product"
      *ngIf="product">
-  <div class="product__title">{{ product.name }}</div>
+  <h2 class="product__title">{{ product.name }}</h2>
   <table class="product__table">
     <tr>
       <td><b>Name</b></td>
@@ -25,5 +25,5 @@
   </table>
   <button class="button"
           [attr.disabled]="!product.isAvailable ? true : null"
-          (click)="onBuy(product)">Buy</button>
+          (click)="onBuy()">Buy</button>
 </div>

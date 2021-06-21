@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../../models/product.model';
-import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
     selector: 'app-product-list',
@@ -13,14 +13,11 @@ export class ProductListComponent {
     products: Product[];
     selectedProduct: Product;
 
-    constructor(public productsService: ProductsService, private cartService: CartService) {}
+    constructor(public productsService: ProductsService, private router: Router) {}
 
-    onProductSelected(selected: Product): void {
-        this.selectedProduct = selected;
-    }
-
-    onBuy(item: Product): void {
-        this.cartService.addProduct({...item});
+    onProductSelected(product: Product): void {
+        const link = ['/product', product.id];
+        this.router.navigate(link);
     }
 
     trackByItems(index: number, item: Product): number {

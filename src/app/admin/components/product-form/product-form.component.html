@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="pannel-title">Product Form</h4>
+  </div>
+  <div class="panel-body">
+    <form
+      *ngIf="product"
+      (ngSubmit)="onSaveProduct()"
+      id="product-form"
+      #form="ngForm"
+    >
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input
+          type="text"
+          pInputText
+          id="name"
+          name="name"
+          placeholder="Product Name"
+          required
+          [(ngModel)]="product.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          [rows]="5"
+          [cols]="80"
+          pInputTextarea
+          autoResize="autoResize"
+          id="description"
+          name="description"
+          [(ngModel)]="product.description"
+        >
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <p-inputNumber [(ngModel)]="product.price" id="price" name="price" mode="decimal"></p-inputNumber>
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <p-dropdown [options]="categories" [(ngModel)]="product.category" id="category" name="category" optionLabel="name"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="price">Is Available</label>
+        <p-checkbox id="isAvailable" name="isAvailable" value="'false'" binary="true" [(ngModel)]="product.isAvailable"></p-checkbox>
+      </div>
+      <button pButton label="Save" type="submit" [disabled]="form.invalid">
+        
+      </button>
+      <button pButton type="button" label="Back" (click)="onGoBack()">
+        
+      </button>
+    </form>
+  </div>
+</div>
