@@ -31,6 +31,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.product = new User(null, '', '');
 
+    // С недавних пор pluck уже DEPRECATED
+    // https://rxjs.dev/api/operators/pluck
     this.route.data.pipe(pluck('product')).subscribe((product: Product) => {
       console.log(product);
       this.product = { ...product };
