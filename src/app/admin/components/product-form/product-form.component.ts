@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CATEGORY_NAMES, Product } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/products/services/products.service';
+import { ProductsPromiseService } from 'src/app/products/services/products-promise.service';
 
 @Component({
   selector: 'app-product-form',
@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/products/services/products.service';
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
   constructor(
-    private productsService: ProductsService,
+    private productsService: ProductsPromiseService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -29,15 +29,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   ngOnInit(): void {
-    // this.product = new User(null, '', '');
-
-    // С недавних пор pluck уже DEPRECATED
-    // https://rxjs.dev/api/operators/pluck
-    this.route.data.pipe(pluck('product')).subscribe((product: Product) => {
-      console.log(product);
-      this.product = { ...product };
-      this.originalProduct = { ...product };
-    });
+    this.route.data
+      .pipe(map((value) => value.product))
+      .subscribe((product: Product) => {
+        this.product = { ...product };
+        this.originalProduct = { ...product };
+      });
 
     // we should recreate component because this code runs only once
     const id = +this.route.snapshot.paramMap.get('productID');
@@ -48,11 +45,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       },
       error: (err: any) => console.log(err),
     };
-    this.sub = this.productsService.getProduct(id).subscribe(observer);
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   onSaveProduct(): void {
@@ -64,6 +60,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.productsService.createProduct(product);
     }
     this.originalProduct = { ...this.product };
+    this.onGoBack();
   }
 
   onGoBack(): void {

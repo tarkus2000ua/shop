@@ -1,5 +1,5 @@
 <div class="cart__title">Cart</div>
-<ng-container *ngIf="items; else empty">
+<ng-container *ngIf="items$ | async as items; else empty">
   <div class="sort">
     <div class="key">
       <label for="sortField">Sort key:</label>
@@ -32,13 +32,12 @@
       <tr app-cart-item
           appHighlight
           *ngFor="let cartItem of items | orderBy:sortField:isAsc; let i = index; trackBy: trackByItems"
-          [itemName]="cartItem.item.name"
-          [itemPrice]="cartItem.item.price"
+          [item]="cartItem"
           [count]="cartItem.count"
           [index]="i"
-          (increase)="onIncrease(i,$event)"
-          (decrease)="onDecrease(i,$event)"
-          (delete)="onDelete(i)">
+          (increase)="onIncrease(cartItem.item,$event)"
+          (decrease)="onDecrease(cartItem.item,$event)"
+          (delete)="onDelete(cartItem)">
       </tr>
     </tbody>
     <tfoot>

@@ -1,24 +1,37 @@
 import { Injectable } from '@angular/core';
-import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
+import {
+  CanDeactivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+} from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/products/services/products.service';
+import { ProductsPromiseService } from 'src/app/products/services/products-promise.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsResolveGuard implements CanDeactivate<unknown> {
-  constructor(private productsService: ProductsService, private router: Router){}
+  constructor(
+    private productsService: ProductsPromiseService,
+    private router: Router
+  ) {}
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    nextState?: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     return true;
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Product | null> {
+  resolve(route: ActivatedRouteSnapshot): Promise<Product | null> {
     console.log('ProductResolve Guard is called');
 
     // if (!route.paramMap.has('productID')) {
@@ -26,25 +39,14 @@ export class ProductsResolveGuard implements CanDeactivate<unknown> {
     // }
 
     const id = +route.paramMap.get('productID');
-    console.log(id);
 
-    return this.productsService.getProduct(id).pipe(
-      map((product: Product) => {
-        if (product) {
-          return product;
-        } else {
-          this.router.navigate(['/products']);
-          return null;
-        }
-      }),
-      take(1),
-      catchError(() => {
+    return this.productsService.getProduct(id).then((product) => {
+      if (product) {
+        return product;
+      } else {
         this.router.navigate(['/products']);
-        // catchError MUST return observable
-        return of(null);
-      })
-    );
+        return null;
+      }
+    });
   }
-
-
 }
