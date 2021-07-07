@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { CartService } from '../../services/cart.service';
 import { CartItem } from './../../../models/CartItem.model';
 import { Product } from '../../../models/product.model';
-import { EMPTY, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { CartObservableService } from '../../services/cart-observable.service';
 
 @Component({
     selector: 'app-cart-list',
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-    items: CartItem[];
+    items$: Observable<CartItem[]>;
     totalQuantity: number;
     totalSum: number;
     sortOptions = ['name', 'price', 'count'];
@@ -22,10 +21,10 @@ export class CartListComponent implements OnInit {
 
     @ViewChild('selector') selector;
 
-    constructor(private cartService: CartService, private router: Router) {}
+    constructor(private cartService: CartObservableService, private router: Router) {}
 
     ngOnInit(): void {
-        this.cartService.cartChanged.subscribe((items) => (this.items = items));
+        this.items$ = this.cartService.getProducts();
         this.cartService.quantityChanged.subscribe((quantity) => (this.totalQuantity = quantity));
         this.cartService.totalChanged.subscribe((sum) => (this.totalSum = sum));
     }
@@ -34,16 +33,16 @@ export class CartListComponent implements OnInit {
         return item.id;
     }
 
-    onIncrease(index: number, quantity: number): void {
-        this.cartService.increaseQuantity(index, quantity);
+    onIncrease(item: Product, quantity: number): void {
+        this.items$ = this.cartService.increaseQuantity(item, quantity);
     }
 
-    onDecrease(index: number, quantity: number): void {
-        this.cartService.decreaseQuantity(index, quantity);
+    onDecrease(item: Product, quantity: number): void {
+        this.items$ = this.cartService.decreaseQuantity(item, quantity);
     }
 
-    onDelete(index: number): void {
-        this.cartService.removeProduct(index);
+    onDelete(cartItem: CartItem): void {
+        this.items$ = this.cartService.removeProduct(cartItem.item.id);
     }
 
     onRemoveAll(): void {

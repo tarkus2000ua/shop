@@ -1,26 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ProductsService } from '../../services/products.service';
 import { Product } from '../../../models/product.model';
+import { ProductsPromiseService } from '../../services/products-promise.service';
 
 @Component({
-    selector: 'app-product-list',
-    templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent {
-    products: Product[];
-    selectedProduct: Product;
+export class ProductListComponent implements OnInit {
+  products: Product[];
+  selectedProduct: Product;
 
-    constructor(public productsService: ProductsService, private router: Router) {}
+  constructor(
+    public productsService: ProductsPromiseService,
+    private router: Router
+  ) {}
 
-    onProductSelected(product: Product): void {
-        const link = ['/product', product.id];
-        this.router.navigate(link);
-    }
+  ngOnInit(): void {
+      this.productsService
+      .getProducts()
+      .then((products) => (this.products = products));
+  }
 
-    trackByItems(index: number, item: Product): number {
-        return item.id;
-    }
+  onProductSelected(product: Product): void {
+    const link = ['/product', product.id];
+    this.router.navigate(link);
+  }
+
+  trackByItems(index: number, item: Product): number {
+    return item.id;
+  }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { CartItem } from 'src/app/models/CartItem.model';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -8,8 +9,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent {
-    @Input() itemName: string;
-    @Input() itemPrice: number;
+    @Input() item: CartItem;
     @Input() count: number;
     @Input() index: number;
     @Output() increase = new EventEmitter<number>();

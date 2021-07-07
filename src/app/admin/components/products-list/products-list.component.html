@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of productsService.getProducts() | async; trackBy: trackByItems"
+    <tr *ngFor="let product of products; trackBy: trackByItems"
         (click)="onProductSelected(product)">
       <td>{{product.name}}</td>
       <td>{{product.price}}</td>

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CartService } from 'src/app/cart/services/cart.service';
+import { CartObservableService } from 'src/app/cart/services/cart-observable.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsCartEmptyGuard implements CanActivate {
   constructor(
-    private cartService: CartService
+    private cartService: CartObservableService,
   ) {}
 
 
