@@ -52,6 +52,7 @@ export class CartObservableService {
         options
       )
       .pipe(
+        // я бы использовал concatMap
         switchMap(() => this.getProducts()),
         catchError(this.handleError)
       );
@@ -85,6 +86,7 @@ export class CartObservableService {
         options
       )
       .pipe(
+        // я бы использовал concatMap
         switchMap(() => this.getProducts()),
         catchError(this.handleError)
       );
@@ -109,6 +111,7 @@ export class CartObservableService {
 
   removeProduct(id: number): Observable<CartItem[]> {
     return this.http.delete<CartItem[]>(`${this.cartUrl}/${id}`).pipe(
+      // я бы использовал concatMap
       switchMap(() => this.getProducts()),
       catchError(this.handleError)
     );
