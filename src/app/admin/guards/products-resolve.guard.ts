@@ -34,10 +34,6 @@ export class ProductsResolveGuard implements CanDeactivate<unknown> {
   resolve(route: ActivatedRouteSnapshot): Promise<Product | null> {
     console.log('ProductResolve Guard is called');
 
-    // if (!route.paramMap.has('productID')) {
-    //   return of(new UserModel(null, '', ''));
-    // }
-
     const id = +route.paramMap.get('productID');
 
     return this.productsService.getProduct(id).then((product) => {
