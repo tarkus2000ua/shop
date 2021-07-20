@@ -1,4 +1,5 @@
 <h2>Product list</h2>
+<p *ngIf="(productsError$ | async) as value">{{value}}</p>
 <table class="products__table">
   <thead>
     <tr>
@@ -7,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products; trackBy: trackByItems"
+    <tr *ngFor="let product of (products$ | async); trackBy: trackByItems"
         (click)="onProductSelected(product)">
       <td>{{product.name}}</td>
       <td>{{product.price}}</td>

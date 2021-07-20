@@ -57,4 +57,17 @@ export class ProductsPromiseService {
       .then((response) => response as Product)
       .catch(this.handleError);
   }
+
+  deleteProduct(product: Product): Promise<Product> {
+    const url = `${this.productsUrl}/${product.id}`;
+
+    return (
+      this.http
+        .delete(url)
+        .toPromise()
+        // json-server return empty object
+        // so we don't use .then(...)
+        .catch(this.handleError)
+    );
+  }
 }

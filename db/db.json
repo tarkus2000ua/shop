@@ -41,6 +41,16 @@
       },
       "isAvailable": true,
       "id": 5
+    },
+    {
+      "name": "EEEEEEEEE22",
+      "description": "description",
+      "price": 370,
+      "category": {
+        "name": "Laptops"
+      },
+      "isAvailable": true,
+      "id": 6
     }
   ],
   "cart": [
@@ -81,6 +91,20 @@
         "id": 5
       },
       "count": 9
+    },
+    {
+      "id": 6,
+      "item": {
+        "name": "EEEEEEEEE",
+        "description": "description",
+        "price": 370,
+        "category": {
+          "name": "Laptops"
+        },
+        "isAvailable": true,
+        "id": 6
+      },
+      "count": 1
     }
   ]
 }
