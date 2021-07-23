@@ -36,7 +36,7 @@ import { routerReducers, CustomSerializer } from './router';
       // serializer: CustomSerializer // has a priority over routerState
     }),
     // Instrumentation must be imported after importing StoreModule (config is optional)
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ProductsStoreModule,
   ],
 })

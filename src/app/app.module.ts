@@ -16,12 +16,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from './core/interceptors';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { RootStoreModule } from './core/@ngrx/root-store.module';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -39,11 +34,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     AppRoutingModule,
     AdminModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+
     RootStoreModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreRouterConnectingModule.forRoot(),
+
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
